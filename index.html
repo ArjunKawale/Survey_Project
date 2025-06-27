@@ -13,8 +13,10 @@
     <form id="surveyForm">
       <label for="name">Name:</label>
       <input type="text" name="name" required>
+      
       <label for="email">Email:</label>
       <input type="email" name="email" required>
+      
       <label for="field">Which academic field interests you the most?</label>
       <select name="field" required>
         <option value="">--Select--</option>
@@ -24,6 +26,7 @@
         <option value="Commerce">Commerce</option>
         <option value="Other">Other</option>
       </select>
+      
       <label for="politics">How do you stay updated on political news?</label>
       <select name="politics" required>
         <option value="">--Select--</option>
@@ -33,20 +36,24 @@
         <option value="Newspapers">Newspapers</option>
         <option value="I don’t follow politics">I don’t follow politics</option>
       </select>
+      
       <label for="globalEvent">Which recent global event impacted you the most and why?</label>
       <textarea name="globalEvent" rows="4" required></textarea>
+      
       <label for="sciFi">What's your favorite science fiction book or movie and why?</label>
       <textarea name="sciFi" rows="4" required></textarea>
+      
       <button type="submit">Submit</button>
     </form>
   </div>
+
   <script>
     document.getElementById("surveyForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
       const data = Object.fromEntries(formData.entries());
 
-      const response = await fetch("/api/submitForm", {
+      const response = await fetch("https://surveysubmit.azurewebsites.net/api/SubmitButton", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
