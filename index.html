@@ -6,6 +6,24 @@
   <title>Survey Form</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Application Insights JS SDK -->
+  <script type="text/javascript">
+    var appInsights = window.appInsights || function (config) {
+      function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } }
+      var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f;
+      for (s.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js",
+           u.getElementsByTagName(o)[0].parentNode.appendChild(s),
+           t.queue = [], i = ["trackEvent", "trackPageView", "trackException", "trackTrace", "trackMetric", "startTrackPage", "stopTrackPage"],
+           f = 0; f < i.length; ++f) r(i[f]);
+      return t;
+    }({
+      instrumentationKey: "1d2389ca-f20d-4469-b6e0-b83f07cf250e"
+    });
+
+    window.appInsights = appInsights;
+    appInsights.trackPageView();
+  </script>
 </head>
 <body>
   <div class="container">
@@ -42,31 +60,33 @@
       
       <label for="sciFi">What's your favorite science fiction book or movie and why?</label>
       <textarea name="sciFi" rows="4" required></textarea>
-       <p class="note">You will receive a copy of your responses via email.</p>
+      
+      <p class="note">You will receive a copy of your responses via email.</p>
       <button type="submit">Submit</button>
     </form>
   </div>
 
   <script>
-  document.getElementById("surveyForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+    document.getElementById("surveyForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
 
-    const response = await fetch("https://prod-23.centralindia.logic.azure.com:443/workflows/4dcddcd3fae14e0fbca08edb2fb0838f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=odILZXEUgHzyLLUXhVp02tMbM-ORsKoO5zJAw70TpLA", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      const response = await fetch("https://prod-23.centralindia.logic.azure.com:443/workflows/4dcddcd3fae14e0fbca08edb2fb0838f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=odILZXEUgHzyLLUXhVp02tMbM-ORsKoO5zJAw70TpLA", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        appInsights.trackEvent({ name: 'SurveySubmitted', properties: data });
+        alert("Survey submitted!");
+        e.target.reset();
+      } else {
+        appInsights.trackEvent({ name: 'SurveySubmissionFailed', properties: { status: response.status } });
+        alert("Error submitting survey.");
+      }
     });
-
-    if (response.ok) {
-      alert("Survey submitted!");
-      e.target.reset();
-    } else {
-      alert("Error submitting survey.");
-    }
-  });
-</script>
-
+  </script>
 </body>
 </html>
