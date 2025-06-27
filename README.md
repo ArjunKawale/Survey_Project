@@ -76,14 +76,14 @@ To try the system:
 
 ## ✅ Summary
 
-This project is a **survey form sample** that demonstrates the integration of 5 Azure cloud services working together:
+This project is a **survey form sample** that integrates **5 Azure cloud services** in a connected workflow:
 
-- **Azure Static Web App** – Hosts the frontend survey form.
-- **Azure Logic App** – Processes form submissions and sends confirmation emails.
-- **Azure Table Storage** – Stores user feedback data.
-- **Azure Monitor** – Tracks the health and performance of the Logic App and sends alerts.
-- **Azure IAM** – Grants read-only access for data analysis.
+- Static Web App
+- Logic App
+- Table Storage
+- Monitor
+- IAM
 
+It demonstrates automation, data handling, and monitoring in a cloud-native environment and satisfies the requirement of using 4+ Azure services.
 
----
 
