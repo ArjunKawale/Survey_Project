@@ -16,7 +16,7 @@ This project demonstrates a fully cloud-integrated feedback form using **5 Azure
 2. **Azure Logic Apps**  
    Processes incoming form data via an HTTP trigger. Logic Apps perform two main actions:
    - Store data into **Azure Table Storage**
-   - Send a confirmation email to the user
+   - Send a confirmation email to the user *(please check the **Spam** folder if the email isn't in your inbox)*
 
    - **Logic App Workflow:**
      ![Logic App Flow](Screenshots/Logic_Apps.png)
