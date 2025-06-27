@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +12,11 @@
     <h2>General Awareness Survey</h2>
     <form id="surveyForm">
       <label for="name">Name:</label>
-      <input type="text" name="name" id="name" required>
-
+      <input type="text" name="name" required>
       <label for="email">Email:</label>
-      <input type="email" name="email" id="email" required>
-
+      <input type="email" name="email" required>
       <label for="field">Which academic field interests you the most?</label>
-      <select name="field" id="field" required>
+      <select name="field" required>
         <option value="">--Select--</option>
         <option value="Science">Science</option>
         <option value="Engineering">Engineering</option>
@@ -25,9 +24,8 @@
         <option value="Commerce">Commerce</option>
         <option value="Other">Other</option>
       </select>
-
       <label for="politics">How do you stay updated on political news?</label>
-      <select name="politics" id="politics" required>
+      <select name="politics" required>
         <option value="">--Select--</option>
         <option value="News apps">News apps</option>
         <option value="TV news">TV news</option>
@@ -35,15 +33,32 @@
         <option value="Newspapers">Newspapers</option>
         <option value="I don’t follow politics">I don’t follow politics</option>
       </select>
-
       <label for="globalEvent">Which recent global event impacted you the most and why?</label>
-      <textarea name="globalEvent" id="globalEvent" rows="4" required></textarea>
-
+      <textarea name="globalEvent" rows="4" required></textarea>
       <label for="sciFi">What's your favorite science fiction book or movie and why?</label>
-      <textarea name="sciFi" id="sciFi" rows="4" required></textarea>
-
+      <textarea name="sciFi" rows="4" required></textarea>
       <button type="submit">Submit</button>
     </form>
   </div>
+  <script>
+    document.getElementById("surveyForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      const response = await fetch("/api/submitForm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        alert("Survey submitted!");
+        e.target.reset();
+      } else {
+        alert("Error submitting survey.");
+      }
+    });
+  </script>
 </body>
 </html>
