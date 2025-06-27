@@ -1,9 +1,0 @@
-{
-  "name": "submitform",
-  "version": "1.0.0",
-  "main": "index.js",
-  "dependencies": {
-    "@azure/data-tables": "^13.1.0",
-    "uuid": "^9.0.0"
-  }
-}
