@@ -6,7 +6,7 @@ module.exports = async function (context, req) {
 
   const account = process.env.STORAGE_ACCOUNT_NAME;
   const accountKey = process.env.STORAGE_ACCOUNT_KEY;
-  const tableName = "SurveyResponses";
+  const tableName = "SurveyResponse";
 
   const credential = new AzureNamedKeyCredential(account, accountKey);
   const client = new TableClient(`https://${account}.table.core.windows.net`, tableName, credential);
