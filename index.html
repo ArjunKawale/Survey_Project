@@ -17,7 +17,7 @@
       <label for="email">Email:</label>
       <input type="email" name="email" required>
       
-      <!-- <label for="field">Which academic field interests you the most?</label>
+      <label for="field">Which academic field interests you the most?</label>
       <select name="field" required>
         <option value="">--Select--</option>
         <option value="Science">Science</option>
@@ -35,7 +35,7 @@
         <option value="Social media">Social media</option>
         <option value="Newspapers">Newspapers</option>
         <option value="I don’t follow politics">I don’t follow politics</option>
-      </select> -->
+      </select>
       
       <label for="globalEvent">Which recent global event impacted you the most and why?</label>
       <textarea name="globalEvent" rows="4" required></textarea>
@@ -53,7 +53,7 @@
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    const response = await fetch("https://surveysubmit.azurewebsites.net/api/SubmitButton", {
+    const response = await fetch("https://prod-23.centralindia.logic.azure.com:443/workflows/4dcddcd3fae14e0fbca08edb2fb0838f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=odILZXEUgHzyLLUXhVp02tMbM-ORsKoO5zJAw70TpLA", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
